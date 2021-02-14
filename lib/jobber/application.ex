@@ -13,9 +13,15 @@ defmodule Jobber.Application do
       name: Jobber.JobRunner
     ]
 
+    registry_config = [
+      keys: :unique,
+      name: Jobber.JobRegistry
+    ]
+
     children = [
       # Starts a worker by calling: Jobber.Worker.start_link(arg)
       # {Jobber.Worker, arg}
+      {Registry, registry_config},
       {DynamicSupervisor, job_runner_config}
     ]
 
